@@ -59,7 +59,12 @@ public class HomeFragment extends Fragment {
             @Override
             public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
 
-
+                /*
+                I Think this is where the error occurs, I don't know how to change it so that
+                it does it not when changed but just does it regardless, how do I make it
+                display the data but just when it opens the app? or just find all the data in a for loop from the
+                database itself?
+*/
                 for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
 
                     if (doc.getType() == DocumentChange.Type.ADDED) {
