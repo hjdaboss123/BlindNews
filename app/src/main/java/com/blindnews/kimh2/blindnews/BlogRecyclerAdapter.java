@@ -25,6 +25,12 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
     }
 
 
+    public void updatePosts(List<BlogPost> blogPostList) {
+        //if you want to update the whole list. If you want to append, List has addAll method I think and use it with notifyItemRangeInserted for better performance.
+        this.blog_list = blogPostList;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -38,7 +44,7 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-            String desc_data = blog_list.get(position).getBody();
+            String desc_data = blog_list.get(position).getAppBody();
             String image_url = blog_list.get(position).getUrl();
             String user_id = blog_list.get(position).getAuthor();
             String time = blog_list.get(position).getDate();
