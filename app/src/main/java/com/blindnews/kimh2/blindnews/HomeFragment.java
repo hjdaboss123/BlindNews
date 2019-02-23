@@ -2,13 +2,20 @@ package com.blindnews.kimh2.blindnews;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -21,6 +28,8 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import static android.support.constraint.Constraints.TAG;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,7 +38,8 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView blog_list_view;
     private List<BlogPost> blog_list;
-    private FirebaseFirestore firebaseFirestore;
+    //private FirebaseFirestore firebaseFirestore;
+    private FirebaseDatabase firebaseDatabase;
 
     private BlogRecyclerAdapter blogRecyclerAdapter;
 
@@ -51,31 +61,29 @@ public class HomeFragment extends Fragment {
         blog_list_view.setLayoutManager(new LinearLayoutManager(container.getContext()));
         blog_list_view.setAdapter(blogRecyclerAdapter);
 
-        // Inflate the layout for this fragment
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference("articles");
 
 
-        firebaseFirestore = FirebaseFirestore.getInstance();
-        firebaseFirestore.collection("articles").addSnapshotListener(new EventListener<QuerySnapshot>() {
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot doc : dataSnapshot.getChildren()) {
+
+                    BlogPost blogPost = doc.getValue(BlogPost.class);
+                    blog_list.add(blogPost);
 
 
-                for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
-
-                    if (doc.getType() == DocumentChange.Type.ADDED) {
-
-
-                        BlogPost blogPost = doc.getDocument().toObject(BlogPost.class);
-                        blog_list.add(blogPost);
-
-                        blogRecyclerAdapter.notifyDataSetChanged();
-                    }
-
-
-
-                    //}
                 }
+                //Log.d("HomeFragment", "onCreateView: " + blog_list.size());
+                //Send updated list to adapter.
+                blogRecyclerAdapter.updatePosts(blog_list);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w(TAG, "Failed to read value.", databaseError.toException());
             }
         });
 

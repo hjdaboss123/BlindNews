@@ -2,14 +2,14 @@ package com.blindnews.kimh2.blindnews;
 
 public class BlogPost {
 
-    public String author, url, body, subTitle, title, date;
+    public String author, url, appAppBody, subTitle, title, date;
 
     public BlogPost() {}
 
-    public BlogPost(String author, String url, String body, String subTitle, String title, String date) {
+    public BlogPost(String author, String url, String appAppBody, String subTitle, String title, String date) {
         this.author = author;
         this.url = url;
-        this.body = body;
+        this.appAppBody = appAppBody;
         this.subTitle = subTitle;
         this.title = title;
         this.date = date;
@@ -31,12 +31,12 @@ public class BlogPost {
         this.url = url;
     }
 
-    public String getBody() {
-        return body;
+    public String getAppBody() {
+        return appAppBody;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setAppBody(String appAppBody) {
+        this.appAppBody = appAppBody;
     }
 
     public String getSubTitle() {

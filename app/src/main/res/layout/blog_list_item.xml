@@ -34,7 +34,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:text="Blog Post Date"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/blog_user_name" />
 
@@ -44,8 +44,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
                 android:text="Author Name"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/blog_subtitle" />
@@ -59,8 +60,8 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:text="Title "
-                android:textSize="36sp"
+                android:text="Title"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -87,6 +88,7 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a metus libero. Donec eu velit id felis posuere dapibus at nec est. Suspendisse vel suscipit est, nec blandit orci. Nam tellus dolor, viverra ac tortor vel, volutpat placerat velit. Praesent vel enim feugiat, lacinia lectus a, pretium eros. Proin a fringilla magna. Proin eget orci a risus consequat elementum. Donec interdum tortor vitae massa consequat, at varius libero pulvinar. Nulla scelerisque posuere urna vitae tincidunt. Maecenas ut interdum est. Proin rhoncus erat a quam vestibulum auctor. Duis non commodo felis, sed feugiat leo. Orci varius natoque penatibus et magnis dis."
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +104,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:text="Subtitle"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/blog_title" />
