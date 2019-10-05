@@ -2,6 +2,7 @@ package com.blindnews.kimh2.blindnews;
 
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +25,10 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -31,10 +36,27 @@ import javax.annotation.Nullable;
 import static android.support.constraint.Constraints.TAG;
 
 
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
+
+
+    class BlogPostSortByNewestFirst implements Comparator<BlogPost> {
+        public int compare(BlogPost a, BlogPost b) {
+            Date aa = a.getDateDate(); // i made up postedDate, replace that
+            Date bb = b.getDateDate();
+            return aa.compareTo(bb);
+        }
+    }
+
+//    public static Iterable<DataSnapshot> reverse(Iterable<DataSnapshot> dataSnapshot) {
+  //      int size = dataSnapshot.
+
+
+    //    return dataSnapshot;
+    //}
 
     private RecyclerView blog_list_view;
     private List<BlogPost> blog_list;
@@ -65,17 +87,19 @@ public class HomeFragment extends Fragment {
         DatabaseReference databaseReference = firebaseDatabase.getReference("articles");
 
 
-
+        //finding the posts and posting it
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot doc : dataSnapshot.getChildren()) {
-
-                    BlogPost blogPost = doc.getValue(BlogPost.class);
-                    blog_list.add(blogPost);
 
 
+                //Iterable<DataSnapshot> snapShotIterator = dataSnapshot.getChildren();
+                for(DataSnapshot ds : dataSnapshot.getChildren()) {
+                    blog_list.add(ds.getValue(BlogPost.class)); // i think? revisit that...
                 }
+                Collections.sort(blog_list, new BlogPostSortByNewestFirst()); // sorts newest first
+
+               // sorts newest first
                 //Log.d("HomeFragment", "onCreateView: " + blog_list.size());
                 //Send updated list to adapter.
                 blogRecyclerAdapter.updatePosts(blog_list);

@@ -1,8 +1,12 @@
 package com.blindnews.kimh2.blindnews;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class BlogPost {
 
     public String author, url, appAppBody, subTitle, title, date;
+    public Date dateDate;
 
     public BlogPost() {}
 
@@ -13,6 +17,36 @@ public class BlogPost {
         this.subTitle = subTitle;
         this.title = title;
         this.date = date;
+
+        String[] months = {"January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "July",
+                "June",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"};
+
+        String[] tokens = date.split("\\s+"); // split date string by space
+        int day = Integer.parseInt(tokens[0]);
+        int month = -1;
+        for (int i = 0; i < 12; i++) {
+            if (tokens[1].equals(months[i])) {
+                month = i+1;
+                break;
+            }
+        }
+
+
+        int year = Integer.parseInt(tokens[2]);
+        if (month < 0) throw new IllegalStateException("Given a month that does not exist: " + tokens[1]);
+        this.dateDate = new Date(year - 1900, month, day);
+
+
     }
 
     public String getAuthor() {
@@ -62,5 +96,7 @@ public class BlogPost {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public Date getDateDate() {return dateDate;}
 }
 

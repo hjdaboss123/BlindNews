@@ -37,21 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
 
-
-
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser == null) {
-            sendToLogin();
-        }
-
-    }
-
-
-    @Override
+/*    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -61,14 +48,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-    @Override
+*/
+/*    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
             case R.id.action_logout_btn:
                 
-                logOut();
+                //logOut();
                 return true;
 
 
@@ -76,19 +63,18 @@ public class MainActivity extends AppCompatActivity {
                 return false;
         }
 
-    }
+    }*/
 
-    private void logOut() {
+//    private void logOut() {
+ //       mAuth.signOut();
+   //     sendToLogin();
+    //}
 
-        mAuth.signOut();
-        sendToLogin();
-    }
-
-    private void sendToLogin() {
+/*    private void sendToLogin() {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
-    }
+    }*/
 
     private void replaceFragment(Fragment fragment) {
 
