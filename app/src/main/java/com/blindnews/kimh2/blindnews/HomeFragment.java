@@ -94,8 +94,12 @@ public class HomeFragment extends Fragment {
 
 
                 //Iterable<DataSnapshot> snapShotIterator = dataSnapshot.getChildren();
+
                 for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                    blog_list.add(ds.getValue(BlogPost.class)); // i think? revisit that...
+                    BlogPost bp = ds.getValue(BlogPost.class);
+                    if(bp != null) {
+                        blog_list.add(bp);
+                    }
                 }
                 Collections.sort(blog_list, new BlogPostSortByNewestFirst()); // sorts newest first
 

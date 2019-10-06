@@ -36,7 +36,7 @@ public class BlogPost {
         int month = -1;
         for (int i = 0; i < 12; i++) {
             if (tokens[1].equals(months[i])) {
-                month = i+1;
+                month = i;
                 break;
             }
         }
